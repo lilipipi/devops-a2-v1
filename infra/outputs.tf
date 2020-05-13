@@ -1,6 +1,6 @@
-# output "instance_public_ip" {
-#   value = data.aws_instance.devops_assignment2.public_ip
-# }
+output "instance_public_ip" {
+  value = data.aws_instance.devops_assignment2.public_ip
+}
 
 output "lb_endpoint" {
   value = aws_lb.devops_assignment2.dns_name

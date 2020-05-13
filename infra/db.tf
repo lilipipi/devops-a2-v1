@@ -49,9 +49,9 @@ resource "aws_db_instance" "devops_assignment2_db" {
   vpc_security_group_ids = [aws_security_group.allow_db_ip.id]
 }
 
-# data "aws_instance" "devops_assignment2" {
-#   filter {
-#     name   = "image-id"
-#     values = [var.ami_id]
-#   }
-# }
+data "aws_instance" "devops_assignment2" {
+  filter {
+    name   = "image-id"
+    values = [var.ami_id]
+  }
+}
