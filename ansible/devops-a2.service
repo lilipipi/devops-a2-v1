@@ -1,0 +1,13 @@
+[Unit]
+Description=devops-a2 Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/ec2-user/dist
+ExecStart=/home/ec2-user/dist/TechTestApp serve
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

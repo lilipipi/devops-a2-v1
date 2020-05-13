@@ -1,4 +1,58 @@
 - name: Deploy Application
   hosts: all
+  become: yes
   vars:
   tasks: 
+    
+    - name: Download the app
+      become: yes
+      get_url:
+        url: https://github.com/servian/TechTestApp/releases/download/v.0.6.0/TechTestApp_v.0.6.0_linux64.zip
+        dest: /home/ec2-user
+
+    - name: Extract the app
+      become: yes
+      unarchive:
+        src: /home/ec2-user/TechTestApp_v.0.6.0_linux64.zip
+        dest: /home/ec2-user
+        copy: no
+
+    - name: Upload database config
+      become: yes
+      copy: 
+        src: conf.toml
+        dest: /home/ec2-user/dist
+    
+    # need to stop the running todo service first because the running app is also running on port 80
+    # - name: Stop the running todo service on ec2
+    #   become: yes
+    #   service:
+    #     name: todo
+    #     state: stopped
+
+    - name: upload app service
+      become: yes
+      copy:
+        src: devops-a2.service
+        dest: /etc/systemd/system
+
+    - name: run and enable the app service
+      become: yes
+      systemd:
+        daemon_reload: yes
+        name: devops-a2
+        state: started
+        enabled: yes
+
+    - name: seed test data
+      become: yes
+      command:
+        chdir: /home/ec2-user/dist
+        cmd: ./TechTestApp updatedb -s
+
+    - name: restart the app service
+      become: yes
+      systemd:
+        name: devops-a2
+        state: restarted
+        
