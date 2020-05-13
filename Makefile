@@ -22,3 +22,6 @@ kube-validate:
 
 kube-restart:
 	kops rolling-update cluster --state=s3://$(shell cd infra && terraform output kops_state_bucket_name)
+
+build:
+	docker build -t techtestapp:latest .
