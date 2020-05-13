@@ -13,3 +13,23 @@ variable "vpc_id" {
 variable "subnet_id" {
   type = string
 }
+
+variable "environment" {
+  type = string
+}
+
+variable "name" {
+  type = string
+}
+
+variable "username" {
+  type = string
+}
+
+variable "password" {
+  type = string
+}
+
+variable "subnet_ids" {
+  type = list(string)
+}
