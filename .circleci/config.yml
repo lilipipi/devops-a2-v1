@@ -22,7 +22,7 @@ commands:
           chmod +x kops-linux-amd64
           sudo mv kops-linux-amd64 /usr/local/bin/kops
           kops export kubecfg rmit.k8s.local --state s3://rmit-kops-state-1z972y
-          
+
 jobs:
   build:
     machine: true
