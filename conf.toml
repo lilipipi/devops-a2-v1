@@ -1,0 +1,6 @@
+"DbUser" = "testuser"
+"DbPassword" = "TestPass"
+"DbName" = "servian"
+"DbPort" = "5432"
+"ListenHost" = "0.0.0.0"
+"ListenPort" = "80"
